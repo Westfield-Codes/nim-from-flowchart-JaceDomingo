@@ -4,7 +4,8 @@
  */
 
 /* Global Variables */
-
+var count = 0;
+var trainer = false;
 
 /** 
  * main  
@@ -14,7 +15,12 @@
  */
 /* Main */
 function main(){
-
+    let again = false;
+    let trainer = confirm("Do you wish to play Trainer Mode?");
+    playNim();
+    again = confirm("Do you want to play again?");
+    if (again == true) main();
+    else alert ("Thanks for playing!")
 }
 
 /** 
@@ -24,7 +30,15 @@ function main(){
  * @return none
  */
 function playNim(){
-
+    count = 0;
+    while (count < 21) {
+        userTurn();
+        if (count > 20) alert("CPU wins");
+        else {
+            cpuTurn();
+            if (count > 20) alert("Player wins");
+        }
+    }
 }
 
 /** 
@@ -34,7 +48,15 @@ function playNim(){
  * @return none
  */
 function userTurn(){
-
+    let turn = prompt("How much do you wish to count? (1-3)")
+    if (turn == 1) count++;
+    else if (turn == 2) count+=2;
+    else if (turn == 3) count+=3;
+    else{
+        alert("Your input is invalid, count is still "+count);
+        userTurn();
+    }
+    alert("The count is now "+count);
 }
 
 /** 
@@ -44,5 +66,12 @@ function userTurn(){
  * @return none
  */
 function cpuTurn(){
-
+    let turn = 0;
+    if (count == 17) turn = 3;
+    else if (count == 18) turn = 2;
+    else if (count == 19 || count == 20) turn = 1;
+    else if (trainer == true) turn = 4 - count%4;
+    else turn = Math.floor(Math.random()*3)+1;
+    count += turn;
+    alert ("I counted "+turn+", the count is now "+count)
 }
