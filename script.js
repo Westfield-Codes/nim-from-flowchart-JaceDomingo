@@ -16,7 +16,7 @@ var trainer = false;
 /* Main */
 function main(){
     let again = false;
-    let trainer = confirm("Do you wish to play Trainer Mode?");
+    trainer = confirm("Do you wish to play Trainer Mode?");
     playNim();
     again = confirm("Do you want to play again?");
     if (again == true) main();
